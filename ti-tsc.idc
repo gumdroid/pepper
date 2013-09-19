@@ -1,5 +1,4 @@
-#
-# Copyright (C) 2011 The Android Open-Source Project
+# Copyright (C) 2012 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,13 +11,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+#
+# Input Device Calibration File for the EVM-SK touch screen.
 #
 
-# WARNING: Everything listed here will be built on ALL platforms,
-# including x86, the emulator, and the SDK.  Modules must be uniquely
-# named (liblights.panda), and must build everywhere, or limit themselves
-# to only building on ARM if they include assembly. Individual makefiles
-# are responsible for having their own logic, for fine-grained control.
+device.internal = 1
 
-LOCAL_PATH := $(call my-dir)
-include $(call all-makefiles-under,$(LOCAL_PATH))
+touch.deviceType = touchScreen
+touch.orientationAware = 1
+
+touch.size.calibration = diameter
+#touch.size.scale = 22.5
+touch.size.bias = 0
+touch.size.isSummed = 0
+
+touch.pressure.calibration = amplitude
+#touch.pressure.scale = 0.0125
+
+touch.orientation.calibration = none
