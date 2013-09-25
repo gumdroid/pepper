@@ -68,7 +68,6 @@ static const struct sensor_t sSensorList[] = {
 		"ST Microelectronics",
 		1, SENSORS_ACCELERATION_HANDLE,
 		SENSOR_TYPE_ACCELEROMETER, RANGE_A, RESOLUTION_A, 0.23f, 20000, { } },
-/*
 	{ "TMP275 Temperature sensor",
 		"Texas Instruments",
 		1, SENSORS_TEMPERATURE_HANDLE,
@@ -77,7 +76,6 @@ static const struct sensor_t sSensorList[] = {
 		"TAOS",
 		1, SENSORS_LIGHT_HANDLE,
 		SENSOR_TYPE_LIGHT,  powf(10, (280.0f / 47.0f)) * 4, 1.0f, 0.75f, 0, { } },
-*/
 };
 
 
@@ -157,7 +155,6 @@ sensors_poll_context_t::sensors_poll_context_t()
 	mPollFds[accel].events = POLLIN;
 	mPollFds[accel].revents = 0;
 
-/*
 	mSensors[temp] = new TempSensor();
 	mPollFds[temp].fd = mSensors[temp]->getFd();
 	mPollFds[temp].events = POLLIN;
@@ -167,7 +164,6 @@ sensors_poll_context_t::sensors_poll_context_t()
 	mPollFds[light].fd = mSensors[light]->getFd();
 	mPollFds[light].events = POLLIN;
 	mPollFds[light].revents = 0;
-*/
 
 	int wakeFds[2];
 	int result = pipe(wakeFds);
