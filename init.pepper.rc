@@ -18,38 +18,23 @@ on init
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
+on fs
+    mount_all /fstab.pepper
+
+    # This board does not have battery
+    setprop hw.nobattery true
+
 on post-fs-data
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
-
-    mkdir /data/misc/camera 0770 media media
 
     # we will remap this as /storage/sdcard0 with the sdcard fuse tool
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
-    # Set indication (checked by vold) that we have finished this action
-    setprop vold.post_fs_data_done 1
-
 on boot
-
-# Default Read Ahead value for sdcards
-    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
-
-# PWM-Backlight for display brightness on LCD3 Cape
-    chmod 0666 /sys/class/backlight/tps65217-bl/brightness
-# Hold a wakelock to stay awake
+    # Hold a wakelock to stay awake
     write /sys/power/wake_lock hack
-
-on fs
-    mount_all /fstab.pepper
-
-    # This board does not have battery, force battery-level to 100%
-    setprop hw.nobattery true
-
-    # Accelerometer sensor lis33de-->input0
-    chown system system /sys/class/input/input0/poll
-    chmod 0600 /sys/class/input/input0/poll
 
 service pvr /system/bin/sgx/rc.pvr start
     class core

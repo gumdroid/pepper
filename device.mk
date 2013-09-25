@@ -23,6 +23,7 @@ PRODUCT_COPY_FILES := \
 	$(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml \
 	$(LOCAL_PATH)/initlogo.rle:root/initlogo.rle \
 	$(LOCAL_PATH)/sd8787_uapsta.bin:system/etc/firmware/mrvl/sd8787_uapsta.bin \
+	$(LOCAL_PATH)/display-enable.sh:system/bin/display-enable.sh \
 	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml
 
 INTERNAL_BOOTIMAGE_FILES := $(LOCAL_PATH)/uEnv.txt
@@ -36,8 +37,9 @@ PRODUCT_PROPERTY_OVERRIDES := \
        hwui.render_dirty_regions=false
 
 # Explicitly specify dpi, otherwise the icons don't show up correctly with SGX enabled
+# Our screen is 4.3" 480x272: roughly 120
 PRODUCT_PROPERTY_OVERRIDES += \
-       ro.sf.lcd_density=160
+       ro.sf.lcd_density=120
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.sys.strictmode.visual=0 \
