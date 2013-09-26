@@ -34,7 +34,7 @@ on post-fs-data
 
 on boot
     # Hold a wakelock to stay awake
-    write /sys/power/wake_lock hack
+    # write /sys/power/wake_lock hack
 
 service pvr /system/bin/sgx/rc.pvr start
     class core
@@ -51,3 +51,7 @@ service iprenew_eth0 /system/bin/dhcpcd -n
 # virtual sdcard daemon running as media_rw (1023)
 service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
     class late_start
+
+service wpa_supplicant /system/bin/wpa_supplicant -Dnl80211 -imlan0 -dd
+    socket wpa_mlan0 dgram 660 wifi wifi
+    oneshot

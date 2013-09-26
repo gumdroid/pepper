@@ -40,11 +40,7 @@
              android:emulated="true"
              android:mtpReserve="100" />
 
-<!-- external sdcard storage -->
-    <storage android:mountPoint="/storage/sdcard1"
-             android:storageDescription="@string/storage_sd_card"
-             android:removable="true" />
-
+<!-- external usb drive storage -->
     <storage android:mountPoint="/storage/usb1"
              android:storageDescription="@string/storage_usb"
              android:removable="true" />

@@ -1,20 +1,7 @@
-#
-# Copyright (C) 2011 The Android Open-Source Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+# Define components to include in an Androild build for this product.
+# Based on device.mk from TI's beaglebone and panda
 
-
+# Pull in specific local files
 PRODUCT_COPY_FILES := \
 	$(LOCAL_PATH)/init.pepper.rc:root/init.pepper.rc \
 	$(LOCAL_PATH)/init.pepper.usb.rc:root/init.pepper.usb.rc \
@@ -24,63 +11,67 @@ PRODUCT_COPY_FILES := \
 	$(LOCAL_PATH)/initlogo.rle:root/initlogo.rle \
 	$(LOCAL_PATH)/sd8787_uapsta.bin:system/etc/firmware/mrvl/sd8787_uapsta.bin \
 	$(LOCAL_PATH)/display-enable.sh:system/bin/display-enable.sh \
-	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml
+	$(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+	$(LOCAL_PATH)/ti-tsc.idc:system/usr/idc/ti-tsc.idc \
+	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml
 
+# Add this to boot folder
 INTERNAL_BOOTIMAGE_FILES := $(LOCAL_PATH)/uEnv.txt
 
-# KeyPads
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-    $(LOCAL_PATH)/ti-tsc.idc:system/usr/idc/ti-tsc.idc
-
+# Don't make SGX work too hard
 PRODUCT_PROPERTY_OVERRIDES := \
        hwui.render_dirty_regions=false
 
 # Explicitly specify dpi, otherwise the icons don't show up correctly with SGX enabled
-# Our screen is 4.3" 480x272: roughly 120
+# Our screen is 4.3" 480x272: roughly 120 display-independent-pixels
 PRODUCT_PROPERTY_OVERRIDES += \
        ro.sf.lcd_density=120
 
+# Don't add visual fault overlays to our eng build
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.sys.strictmode.visual=0 \
 	persist.sys.strictmode.disable=1
 
+PRODUCT_PROPERTY_OVERRIDES += \
+        net.dns1=8.8.8.8 \
+        net.dns2=8.8.4.4
+
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 
-DEVICE_PACKAGE_OVERLAYS := \
-    device/gumstix/pepper/overlay
+DEVICE_PACKAGE_OVERLAYS := device/gumstix/pepper/overlay
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# host package required for making sdcard tarball
+# System specific libraries
 PRODUCT_PACKAGES += \
-       fs_get_stats
+	lights.pepper \
+	sensors.pepper
 
+# System Utilities
 PRODUCT_PACKAGES += \
-	librs_jni \
-	com.android.future.usb.accessory
+	fs_get_stats \
+	dhcpcd.conf \
+	make_ext4fs
 
+# Audio utils
 PRODUCT_PACKAGES += \
-	libaudioutils
-
-PRODUCT_PACKAGES += \
+	libaudioutils \
         tinycap \
         tinymix \
         tinyplay
 
+# Live Wallpapers
 PRODUCT_PACKAGES += \
-	dhcpcd.conf
+        LiveWallpapers \
+        LiveWallpapersPicker \
+        MagicSmokeWallpapers \
+        VisualizationWallpapers
 
-# Filesystem management tools
+# not sure if we need these...
 PRODUCT_PACKAGES += \
-	make_ext4fs
-
-# Backlight HAL (liblights)
-PRODUCT_PACKAGES += \
-	lights.pepper
-
-PRODUCT_PACKAGES += \
-	sensors.pepper \
+	librs_jni \
+	com.android.future.usb.accessory
 
 $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
-$(call inherit-product-if-exists, external/tslib/tslib.mk)
