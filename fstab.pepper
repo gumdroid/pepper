@@ -5,4 +5,4 @@
 # Note that /sdcard storage is a per-user, bind-mount directory within /data
 /dev/block/mmcblk0p2	/system	ext4	ro	wait
 /dev/block/mmcblk0p3	/cache	ext4	noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait
-/dev/block/mmcblk0p5	/data	ext4	noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait
+/dev/block/mmcblk0p4	/data	ext4	noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait

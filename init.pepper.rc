@@ -34,7 +34,7 @@ on post-fs-data
 
 on boot
     # Hold a wakelock to stay awake
-    # write /sys/power/wake_lock hack
+    write /sys/power/wake_lock hack
 
 service pvr /system/bin/sgx/rc.pvr start
     class core

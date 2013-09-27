@@ -13,8 +13,10 @@ PRODUCT_COPY_FILES := \
 	$(LOCAL_PATH)/display-enable.sh:system/bin/display-enable.sh \
 	$(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 	$(LOCAL_PATH)/ti-tsc.idc:system/usr/idc/ti-tsc.idc \
-	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+	frameworks/native/data/etc/android.hardware.touchscreen.xml:system/etc/permissions/android.hardware.touchscreen.xml \
+	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.seddnsor.accelerometer.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml
 
 # Add this to boot folder
@@ -35,8 +37,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.sys.strictmode.disable=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
-        net.dns1=8.8.8.8 \
-        net.dns2=8.8.4.4
+        dhcp.eth0.dns1=8.8.8.8 \
+        dhcp.eth0.dns2=8.8.4.4
 
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 
