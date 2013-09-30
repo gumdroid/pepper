@@ -25,12 +25,14 @@ on fs
     setprop hw.nobattery true
 
 on post-fs-data
-    mkdir /data/misc/dhcp 0770 dhcp dhcp
-    chown dhcp dhcp /data/misc/dhcp
-
     # we will remap this as /storage/sdcard0 with the sdcard fuse tool
     mkdir /data/media 0770 media_rw media_rw
-    chown media_rw media_rw /data/media
+
+    # Create the directories used for wifi
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
 
 on boot
     # Hold a wakelock to stay awake
@@ -52,6 +54,19 @@ service iprenew_eth0 /system/bin/dhcpcd -n
 service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
     class late_start
 
-service wpa_supplicant /system/bin/wpa_supplicant -Dnl80211 -imlan0 -dd
+service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -imlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -dd
+    class main
     socket wpa_mlan0 dgram 660 wifi wifi
+    disabled
     oneshot
+
+service dhcpcd_mlan0 /system/bin/dhcpcd -aABDKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_mlan0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+

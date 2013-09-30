@@ -36,9 +36,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.sys.strictmode.visual=0 \
 	persist.sys.strictmode.disable=1
 
+# Networks
 PRODUCT_PROPERTY_OVERRIDES += \
         dhcp.eth0.dns1=8.8.8.8 \
-        dhcp.eth0.dns2=8.8.4.4
+        dhcp.eth0.dns2=8.8.4.4 \
+        wifi.interface=mlan0
 
 PRODUCT_CHARACTERISTICS := tablet,nosdcard
 
