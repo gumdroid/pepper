@@ -24,6 +24,9 @@ on fs
     # This board does not have battery
     setprop hw.nobattery true
 
+    # Allow system to manipulate backlight
+    chown system system /sys/class/backlight/tps65217-bl/brightness
+
 on post-fs-data
     # we will remap this as /storage/sdcard0 with the sdcard fuse tool
     mkdir /data/media 0770 media_rw media_rw
@@ -69,4 +72,3 @@ service iprenew_mlan0 /system/bin/dhcpcd -n
     class main
     disabled
     oneshot
-

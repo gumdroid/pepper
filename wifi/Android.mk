@@ -39,10 +39,6 @@ WPA_SUPPL_DIR_INCLUDE += external/libnl-headers
 WPA_SRC_FILE += driver_cmd_nl80211.c
 endif
 
-ifdef CONFIG_DRIVER_WEXT
-WPA_SRC_FILE += driver_cmd_wext.c
-endif
-
 # To force sizeof(enum) = 4
 L_CFLAGS += -mabi=aapcs-linux
 
@@ -59,9 +55,6 @@ LOCAL_CFLAGS := $(L_CFLAGS)
 LOCAL_SRC_FILES := $(WPA_SRC_FILE)
 LOCAL_C_INCLUDES := $(WPA_SUPPL_DIR_INCLUDE)
 include $(BUILD_STATIC_LIBRARY)
-
-########################
-
 endif
 
 include $(CLEAR_VARS)
@@ -70,25 +63,4 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/wifi
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
-include $(BUILD_PREBUILT)
-
-########################
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := hostapd.conf
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/wifi
-LOCAL_SRC_FILES := $(LOCAL_MODULE)
-include $(BUILD_PREBUILT)
-
-
-########################
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := dhcpcd.conf
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/dhcpcd
-LOCAL_SRC_FILES := android_dhcpcd.conf
 include $(BUILD_PREBUILT)
