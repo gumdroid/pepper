@@ -1,5 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
+ifeq ($(TARGET_PRODUCT),pepper) 
+
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := audio.primary.pepper
