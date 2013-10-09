@@ -4,6 +4,7 @@
 # Pull in specific local files
 PRODUCT_COPY_FILES := \
 	$(LOCAL_PATH)/init.pepper.rc:root/init.pepper.rc \
+	$(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
 	$(LOCAL_PATH)/init.pepper.usb.rc:root/init.pepper.usb.rc \
 	$(LOCAL_PATH)/fstab.pepper:root/fstab.pepper \
 	$(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
