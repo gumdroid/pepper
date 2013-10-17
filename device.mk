@@ -4,8 +4,8 @@
 # Pull in specific local files
 PRODUCT_COPY_FILES := \
 	$(LOCAL_PATH)/init.pepper.rc:root/init.pepper.rc \
-	$(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
 	$(LOCAL_PATH)/init.pepper.usb.rc:root/init.pepper.usb.rc \
+	$(LOCAL_PATH)/libaudio/audio_policy.conf:system/etc/audio_policy.conf \
 	$(LOCAL_PATH)/fstab.pepper:root/fstab.pepper \
 	$(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
 	$(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml \
@@ -49,7 +49,8 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # System specific libraries
 PRODUCT_PACKAGES += \
 	lights.pepper \
-	sensors.pepper
+	sensors.pepper \
+	audio.primary.pepper
 
 # System Utilities
 PRODUCT_PACKAGES += \
@@ -59,7 +60,6 @@ PRODUCT_PACKAGES += \
 
 # Audio utils
 PRODUCT_PACKAGES += \
-	libaudioutils \
         tinycap \
         tinymix \
         tinyplay
