@@ -41,18 +41,17 @@
 #define PCM_DEVICE 0
 #define MIXER_CARD 0
 
-#define OUT_PERIOD_SIZE 880
-#define OUT_SHORT_PERIOD_COUNT 2
-#define OUT_LONG_PERIOD_COUNT 8
-#define OUT_SAMPLING_RATE 44100
+#define OUT_PERIOD_SIZE 1024 
+#define OUT_PERIOD_COUNT 16 
+#define OUT_SAMPLING_RATE 48000
 
 #define IN_PERIOD_SIZE 1024
-#define IN_PERIOD_COUNT 4
-#define IN_SAMPLING_RATE 44100
+#define IN_PERIOD_COUNT 16
+#define IN_SAMPLING_RATE 48000
 
 /* minimum sleep time in out_write() when write threshold is not reached */
 #define MIN_WRITE_SLEEP_US 2000
-#define MAX_WRITE_SLEEP_US ((OUT_PERIOD_SIZE * OUT_SHORT_PERIOD_COUNT * 1000000) / OUT_SAMPLING_RATE)
+#define MAX_WRITE_SLEEP_US ((OUT_PERIOD_SIZE * OUT_PERIOD_COUNT * 1000000) / OUT_SAMPLING_RATE)
 
 enum {
     OUT_BUFFER_TYPE_UNKNOWN,
@@ -64,19 +63,16 @@ struct pcm_config pcm_config_out = {
     .channels = 2,
     .rate = OUT_SAMPLING_RATE,
     .period_size = OUT_PERIOD_SIZE,
-    .period_count = OUT_LONG_PERIOD_COUNT,
+    .period_count = OUT_PERIOD_COUNT,
     .format = PCM_FORMAT_S16_LE,
-    .start_threshold = OUT_PERIOD_SIZE * OUT_SHORT_PERIOD_COUNT,
 };
 
 struct pcm_config pcm_config_in = {
-    .channels = 2,
+    .channels = 1,
     .rate = IN_SAMPLING_RATE,
     .period_size = IN_PERIOD_SIZE,
     .period_count = IN_PERIOD_COUNT,
     .format = PCM_FORMAT_S16_LE,
-    .start_threshold = 1,
-    .stop_threshold = (IN_PERIOD_SIZE * IN_PERIOD_COUNT),
 };
 
 struct audio_device {
@@ -182,7 +178,7 @@ static void select_devices(struct audio_device *adev)
 
     audio_route_update_mixer(adev->ar);
 
-    ALOGV("hp=%c speaker=%c main-mic=%c", headphone_on ? 'y' : 'n',
+    ALOGE("hp=%c speaker=%c main-mic=%c", headphone_on ? 'y' : 'n',
           speaker_on ? 'y' : 'n', main_mic_on ? 'y' : 'n');
 }
 
@@ -257,7 +253,7 @@ static int start_output_stream(struct stream_out *out)
         pthread_mutex_unlock(&in->lock);
     }
 
-    out->pcm = pcm_open(PCM_CARD, device, PCM_OUT | PCM_NORESTART, out->pcm_config);
+    out->pcm = pcm_open(PCM_CARD, device, PCM_OUT, out->pcm_config);
 
     if (out->pcm && !pcm_is_ready(out->pcm)) {
         ALOGE("pcm_open(out) failed: %s", pcm_get_error(out->pcm));
@@ -537,10 +533,7 @@ static uint32_t out_get_latency(const struct audio_stream_out *stream)
 
     pthread_mutex_lock(&adev->lock);
 
-    if (adev->screen_off && !adev->active_in)
-        period_count = OUT_LONG_PERIOD_COUNT;
-    else
-        period_count = OUT_SHORT_PERIOD_COUNT;
+    period_count = OUT_PERIOD_COUNT;
 
     pthread_mutex_unlock(&adev->lock);
 
@@ -591,10 +584,7 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
     if (buffer_type != out->buffer_type) {
         size_t period_count;
 
-        if (buffer_type == OUT_BUFFER_TYPE_LONG)
-            period_count = OUT_LONG_PERIOD_COUNT;
-        else
-            period_count = OUT_SHORT_PERIOD_COUNT;
+	period_count = OUT_PERIOD_COUNT;
 
         out->write_threshold = out->pcm_config->period_size * period_count;
         /* reset current threshold if exiting standby */
@@ -679,7 +669,7 @@ static ssize_t out_write(struct audio_stream_out *stream, const void* buffer,
             }
         } else if ((kernel_frames < out->write_threshold) &&
             ((out->write_threshold - kernel_frames) >
-                (int)(period_size * OUT_SHORT_PERIOD_COUNT))) {
+                (int)(period_size * OUT_PERIOD_COUNT))) {
             out->cur_write_threshold = (kernel_frames / period_size + 1) * period_size;
             out->cur_write_threshold += period_size / 4;
         }
