@@ -21,17 +21,8 @@ TARGET_BOARD_PLATFORM := omap3
 BOARD_HAVE_BLUETOOTH := false
 #BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/generic/common/bluetooth
 
-#BOARD_WLAN_DEVICE := mrvl
-#WPA_SUPPLICANT_VERSION	:= VER_0_8_X
-#BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-#BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_mrvl8787
-#BOARD_HOSTAPD_DRIVER := NL80211
-#BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_mrvl8787
-#WIFI_DRIVER_FW_PATH_STA	:= "/system/etc/firmware/sd8787_uapsta.bin"
-#WIFI_DRIVER_FW_PATH_AP	:= "/system/etc/firmware/sd8787_uapsta.bin"
-
 TARGET_KERNEL_MODULES := \
-    /mnt/pepper4/kernel/net/wireless/cfg80211.ko:system/lib/modules/cfg80211.ko
+    $(TOP)/kernel/net/wireless/cfg80211.ko:system/lib/modules/cfg80211.ko
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_mrvl8787
