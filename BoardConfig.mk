@@ -4,9 +4,9 @@
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_KERNEL := true
 UBOOT_DIR := $(TOP)/uboot
-UBOOT_CONFIG := am335x_pepper
+UBOOT_CONFIG := pepper
 KERNEL_DIR := $(TOP)/kernel
-KERNEL_CONFIG := pepper_android_defconfig
+KERNEL_CONFIG := pepper_android
 
 # As of Android 4.3, no special optimizations for Cortex-A8
 TARGET_ARCH := arm
