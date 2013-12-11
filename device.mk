@@ -8,20 +8,17 @@ PRODUCT_COPY_FILES := \
 	$(LOCAL_PATH)/libaudio/audio_policy.conf:system/etc/audio_policy.conf \
 	$(LOCAL_PATH)/libaudio/mixer_paths.xml:system/etc/mixer_paths.xml \
 	$(LOCAL_PATH)/fstab.pepper:root/fstab.pepper \
+	$(LOCAL_PATH)/uEnv.txt:boot/uEnv.txt \
 	$(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
 	$(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml \
 	$(LOCAL_PATH)/initlogo.rle:root/initlogo.rle \
 	$(LOCAL_PATH)/sd8787_uapsta.bin:system/etc/firmware/mrvl/sd8787_uapsta.bin \
-	$(LOCAL_PATH)/display-enable.sh:system/bin/display-enable.sh \
 	$(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 	$(LOCAL_PATH)/ti-tsc.idc:system/usr/idc/ti-tsc.idc \
 	frameworks/native/data/etc/android.hardware.touchscreen.xml:system/etc/permissions/android.hardware.touchscreen.xml \
 	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
 	#frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml
-
-# Add this to boot folder
-INTERNAL_BOOTIMAGE_FILES := $(LOCAL_PATH)/uEnv.txt
 
 # Don't make SGX work too hard
 PRODUCT_PROPERTY_OVERRIDES := \

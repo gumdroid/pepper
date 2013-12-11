@@ -2,6 +2,7 @@
 # It is based on the 'Toro' device conifguration file (Copyright Google Inc.)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+$(call inherit-product, device/gumstix/common/common.mk)
 $(call inherit-product, device/gumstix/pepper/device.mk)
 
 PRODUCT_NAME := pepper
