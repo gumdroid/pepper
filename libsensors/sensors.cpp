@@ -67,15 +67,15 @@ static const struct sensor_t sSensorList[] = {
 	{ "ST LIS3LV02DL Accelerometer",
 		"ST Microelectronics",
 		1, SENSORS_ACCELERATION_HANDLE,
-		SENSOR_TYPE_ACCELEROMETER, RANGE_A, RESOLUTION_A, 0.23f, 20000, { } },
+		SENSOR_TYPE_ACCELEROMETER, RANGE_A, RESOLUTION_A, 0.23f, 20000, NULL},
 	{ "TMP275 Temperature sensor",
 		"Texas Instruments",
 		1, SENSORS_TEMPERATURE_HANDLE,
-		SENSOR_TYPE_TEMPERATURE, RANGE_T, RESOLUTION_T, 0.15f, 5000, { } },
+		SENSOR_TYPE_TEMPERATURE, RANGE_T, RESOLUTION_T, 0.15f, 5000, NULL},
 	{ "TSL2550 Light sensor",
 		"TAOS",
 		1, SENSORS_LIGHT_HANDLE,
-		SENSOR_TYPE_LIGHT,  powf(10, (280.0f / 47.0f)) * 4, 1.0f, 0.75f, 0, { } },
+		SENSOR_TYPE_LIGHT,  powf(10, (280.0f / 47.0f)) * 4, 1.0f, 0.75f, 0, NULL},
 };
 
 
