@@ -1,4 +1,5 @@
-loaduimage=fatload mmc 0:1 0x82000000 uImage
+loadzimage=fatload mmc 0:1 0x82000000 zImage
 loadramdisk=fatload mmc 0:1 0x81600000 uInitrd
+loadftd=fatload mmc 0:1 0x88000000 am335x-pepper.dtb
 bootargs=console=ttyO0,115200n8 androidboot.console=ttyO0 mem=512M init=/init
-uenvcmd=run loaduimage; run loadramdisk; bootm 0x82000000 0x81600000
+uenvcmd=run loadzimage; run loadramdisk; bootz 0x82000000 0x81600000 0x88000000
