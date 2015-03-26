@@ -3,7 +3,7 @@
 # Build bootloader and kernel from source; don't just install binaries
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_KERNEL := true
-UBOOT_CONFIG := am335x_pepper
+UBOOT_CONFIG := pepper
 KERNEL_CONFIG := pepper_android
 
 # As of Android 4.3, no special optimizations for Cortex-A8
