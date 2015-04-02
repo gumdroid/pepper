@@ -1,6 +1,8 @@
 # Define components to include in an Androild build for this product.
 # Based on device.mk from TI's beaglebone and panda
 
+KERNEL_CONFIG_SRC := $(LOCAL_PATH)/pepper_android_defconfig
+
 # Pull in specific local files
 PRODUCT_COPY_FILES := \
 	$(LOCAL_PATH)/init.pepper.rc:root/init.pepper.rc \
@@ -49,6 +51,9 @@ PRODUCT_PACKAGES += \
 	lights.pepper \
 	sensors.pepper \
 	audio.primary.pepper
+
+# SGX
+PRODUCT_PACKAGES += sgx_userspace_blobs
 
 # System Utilities
 PRODUCT_PACKAGES += \
