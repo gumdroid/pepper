@@ -1,7 +1,7 @@
 # Define components to include in an Androild build for this product.
 # Based on device.mk from TI's beaglebone and panda
 
-KERNEL_CONFIG_SRC := $(LOCAL_PATH)/pepper_android_defconfig
+KERNEL_CONFIG := $(LOCAL_PATH)/pepper_android_defconfig
 
 # Pull in specific local files
 PRODUCT_COPY_FILES := \

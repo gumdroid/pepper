@@ -1,9 +1,9 @@
 # Product-specific compile-time definitions
 
-# Build bootloader and kernel from source; don't just install binaries
+# Build bootloader and kernel from source
 TARGET_NO_BOOTLOADER := true
-TARGET_NO_KERNEL := true
 UBOOT_CONFIG := pepper
+BOARD_KERNEL_BASE := 0x80000000
 
 # As of Android 4.3, no special optimizations for Cortex-A8
 TARGET_ARCH := arm
