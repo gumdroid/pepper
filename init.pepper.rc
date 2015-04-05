@@ -41,7 +41,7 @@ on boot
     # Hold a wakelock to stay awake
     write /sys/power/wake_lock hack
 
-service pvr /system/bin/sgx/rc.pvr start
+service pvr /system/bin/pvr-service start
     class core
     oneshot
 
