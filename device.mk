@@ -20,31 +20,16 @@ PRODUCT_COPY_FILES := \
 	frameworks/native/data/etc/android.hardware.touchscreen.xml:system/etc/permissions/android.hardware.touchscreen.xml \
 	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
-	#frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml
 
 # Don't make SGX work too hard
-PRODUCT_PROPERTY_OVERRIDES := \
-       hwui.render_dirty_regions=false
+# PRODUCT_PROPERTY_OVERRIDES := hwui.render_dirty_regions=false
 
 # Explicitly specify dpi, otherwise the icons don't show up correctly with SGX enabled
 # Our screen is 4.3" 480x272: roughly 120 display-independent-pixels
-PRODUCT_PROPERTY_OVERRIDES += \
-       ro.sf.lcd_density=120
-
-# Don't add visual fault overlays to our eng build
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.sys.strictmode.visual=0 \
-	persist.sys.strictmode.disable=1
+PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=120
 
 # Networks
-PRODUCT_PROPERTY_OVERRIDES += \
-        wifi.interface=mlan0
-
-PRODUCT_CHARACTERISTICS := tablet,nosdcard
-
-DEVICE_PACKAGE_OVERLAYS := device/gumstix/pepper/overlay
-
-PRODUCT_TAGS += dalvik.gc.type-precise
+PRODUCT_PROPERTY_OVERRIDES += wifi.interface=mlan0
 
 # System specific libraries
 PRODUCT_PACKAGES += \
@@ -53,30 +38,6 @@ PRODUCT_PACKAGES += \
 	audio.primary.pepper
 
 # SGX
-PRODUCT_PACKAGES += sgx_userspace_blobs
-
-# System Utilities
-PRODUCT_PACKAGES += \
-	fs_get_stats \
-	dhcpcd.conf \
-	make_ext4fs
-
-# Audio utils
-PRODUCT_PACKAGES += \
-        tinycap \
-        tinymix \
-        tinyplay
-
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-        LiveWallpapers \
-        LiveWallpapersPicker \
-        MagicSmokeWallpapers \
-        VisualizationWallpapers
-
-# not sure if we need these...
-PRODUCT_PACKAGES += \
-	librs_jni \
-	com.android.future.usb.accessory
+#PRODUCT_PACKAGES += sgx_userspace_blobs
 
 $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
