@@ -1,7 +1,7 @@
 # Product-specific compile-time definitions
 
 # Build bootloader and kernel from source
-UBOOT_CONFIG := pepper
+UBOOT_CONFIG := pepper_ddr3
 TARGET_BOOTLOADER_IS_2ND := true
 BOARD_KERNEL_BASE := 0x80000000
 
