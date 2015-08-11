@@ -37,6 +37,11 @@ on post-fs-data
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
 
+    # HACK: Toggle eth0 on boot
+    setprop net.dns1 8.8.8.8
+    setprop net.dns2 8.8.4.4
+    ifup eth0
+
 on boot
     # Hold a wakelock to stay awake
     write /sys/power/wake_lock hack
