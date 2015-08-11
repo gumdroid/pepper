@@ -37,4 +37,4 @@ PRODUCT_PACKAGES += \
 	audio.primary.pepper
 
 # SGX
-PRODUCT_PACKAGES += sgx_userspace_blobs
+PRODUCT_PACKAGES += sgx_userspace_blobs samplemedia
