@@ -15,10 +15,15 @@ PRODUCT_COPY_FILES := \
 	$(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml \
 	$(LOCAL_PATH)/initlogo.rle:root/initlogo.rle \
 	$(LOCAL_PATH)/sd8787_uapsta.bin:system/vendor/firmware/mrvl/sd8787_uapsta.bin \
+	$(LOCAL_PATH)/TIInit_11.8.32.bts:system/vendor/firmware/TIInit_11.8.32.bts \
+	$(LOCAL_PATH)/wl1271-nvs.bin:system/vendor/firmware/ti-connectivity/wl1271-nvs.bin \
+	$(LOCAL_PATH)/wl18xx-fw-2.bin:system/vendor/firmware/ti-connectivity/wl18xx-fw-2.bin \
 	$(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 	$(LOCAL_PATH)/ti-tsc.idc:system/usr/idc/ti-tsc.idc \
 	$(LOCAL_PATH)/EP0820M09.idc:system/usr/idc/EP0820M09.idc \
+	$(LOCAL_PATH)/ueventd.pepper.rc:root/ueventd.pepper.rc \
 	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
+        system/bluetooth/data/main.nonsmartphone.conf:system/etc/bluetooth/main.conf \
 	frameworks/native/data/etc/android.hardware.touchscreen.xml:system/etc/permissions/android.hardware.touchscreen.xml \
 	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml
@@ -28,13 +33,14 @@ PRODUCT_COPY_FILES := \
 PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=120
 
 # Networks
-PRODUCT_PROPERTY_OVERRIDES += wifi.interface=mlan0
+PRODUCT_PROPERTY_OVERRIDES += wifi.interface=wlan0
 
 # System specific libraries
 PRODUCT_PACKAGES += \
 	lights.pepper \
 	sensors.pepper \
-	audio.primary.pepper
+	audio.primary.pepper \
+	uim-sysfs
 
 # SGX
 PRODUCT_PACKAGES += sgx_userspace_blobs samplemedia
