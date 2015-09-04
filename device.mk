@@ -20,6 +20,7 @@ PRODUCT_COPY_FILES := \
 	$(LOCAL_PATH)/wl18xx-fw-2.bin:system/vendor/firmware/ti-connectivity/wl18xx-fw-2.bin \
 	$(LOCAL_PATH)/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
 	$(LOCAL_PATH)/ti-tsc.idc:system/usr/idc/ti-tsc.idc \
+	$(LOCAL_PATH)/ADS7846_Touchscreen.idc:system/usr/idc/ADS7846_Touchscreen.idc \
 	$(LOCAL_PATH)/EP0820M09.idc:system/usr/idc/EP0820M09.idc \
 	$(LOCAL_PATH)/ueventd.pepper.rc:root/ueventd.pepper.rc \
 	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
